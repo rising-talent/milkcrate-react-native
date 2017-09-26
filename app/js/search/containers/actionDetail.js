@@ -34,10 +34,15 @@ import * as _ from 'underscore'
 import UtilService from '../../components/util'
 import Cache from '../../components/Cache'
 
+//for comment UI
+import BusinessRecentActivityListCell from '../components/businessRecentActivityListCell';
+import Stars from 'react-native-stars-rating';
+
 class ActionDetail extends Component {
   constructor(props) {
     super(props);
-
+    this.dataSourceRecentActivity = new ListView.DataSource(
+      { rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       initialize: true,
       didStatus: false,
@@ -45,6 +50,9 @@ class ActionDetail extends Component {
       pinned: false,
       loading: true,
       showAnimiation: false,
+      //for comment UI
+      comments: [],
+      user: {}
     };
   }
 
@@ -74,6 +82,17 @@ class ActionDetail extends Component {
 
       this.hasMounted && this.setState({
         pinned: exist ? true: false,
+      })
+    })
+
+    bendService.getUser( (error, result) => {
+      if (error) {
+        console.log(error);
+        return;
+      }
+
+      this.hasMounted && this.setState({
+        user: result,
       })
     })
 
@@ -192,6 +211,42 @@ class ActionDetail extends Component {
     }
   }
 
+  onComment() {
+    //console.log(this.state.businessRate, this.state.comment)
+    if (UtilService.isValid(this.state.comment)) {
+      bendService.captureComment({
+        id: this.props.action._id,
+        type: 'action',
+        comment: this.state.comment,
+      }, (error, result)=>{
+        if (error) {
+          console.log(error);
+          return;
+        }
+        this.state.comments.unshift(result);
+        this.hasMounted && this.setState({
+          comment: "",
+          comments: this.state.comments,
+        })
+      })
+    }
+  }
+
+  renderRecentActivityRow(rowData, sectionID, rowID) {
+    return (
+      <BusinessRecentActivityListCell
+        name={ rowData.user.name }
+        description={ rowData.comment }
+        avatar={ rowData.user.avatar ? UtilService.getSmallImage(rowData.user.avatar) : '' }
+        avatarBackColor={ UtilService.getBackColor(rowData.user.avatar) }
+        defaultAvatar={ UtilService.getDefaultAvatar(rowData.user.defaultAvatar) }
+        time={ UtilService.getPastDateTime(rowData._bmd.createdAt) }
+        rating={ Number(rowData.rating || 0) }
+        onClick={ () => this.onRecentActivityCellPressed(rowID) }
+      />
+    );
+  }
+
   render() {
     const { 
       action,
@@ -206,7 +261,9 @@ class ActionDetail extends Component {
     var imageObj = action.coverImage ? action.coverImage : category.coverImage;
     backgroundImage = UtilService.getLargeImage(imageObj);
     backgroundColor = UtilService.getBackColor(imageObj);
-
+    var avatar = this.state.user.avatar ? UtilService.getSmallImage(this.state.user.avatar) : null;
+    var defaultAvatar = this.state.user.defaultAvatar ? UtilService.getDefaultAvatar(this.state.user.defaultAvatar) : null;
+    
     return (
       <View style={ styles.container }>
         <NavTitleBar
@@ -249,6 +306,46 @@ class ActionDetail extends Component {
               }
             </View>
           </View>}
+
+          <View style={ styles.recentActivityContainer }>
+            <View style={ styles.sectionTitleWrapper }>
+              <Text style={ styles.textSectionTitle }>Comments</Text>
+            </View>
+            <View style={ styles.recentActivityListViewWrapper }>
+              <ListView
+                enableEmptySections={ true }
+                dataSource={ this.dataSourceRecentActivity.cloneWithRows(this.state.comments) }
+                renderRow={ this.renderRecentActivityRow.bind(this) }
+              />
+            </View>
+          </View>
+          <View style={ styles.ratingMainContainer }>
+            { avatar && <Image style={ [styles.imageCategory, { backgroundColor:UtilService.getBackColor(avatar) }]} source={{ uri:avatar }} /> }
+            { !avatar && defaultAvatar && <Image style={ styles.imageCategory } source={ defaultAvatar }/> }
+            <View style={ styles.rating_commentContentContainer }>
+              <TextInput
+                autoCapitalize="none"
+                autoCorrect={ false }
+                multiline={ false }
+                placeholder="Add a comment"
+                placeholderTextColor={ commonColors.placeholderText }
+                textAlign="left"
+                style={ styles.input }
+                underlineColorAndroid="transparent"
+                returnKeyType={ 'done' }
+                value={this.state.comment}
+                onChangeText={ (text) => this.hasMounted && this.setState({ comment: text }) }
+                onSubmitEditing={ () => this.onComment() }
+              />              
+            </View>
+          </View>
+          <View style={ styles.buttonRateBusinessWrapper }>
+            <TouchableOpacity activeOpacity={ .5 } onPress={ () => this.onComment() }>
+              <View style={ styles.buttonRateBusiness }>
+                <Text style={ styles.textButton }>Comment</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
         { !this.state.loading && !this.state.didStatus && <TouchableOpacity onPress={ () => this.onCheckIn() }>
           <View style={ styles.buttonCheckin }>
@@ -400,5 +497,76 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Semibold',
     fontSize: 14,
     paddingVertical: 10,
+  },
+  recentActivityContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    marginTop:20
+  },
+  recentActivityListViewWrapper: {
+    borderStyle: 'solid',
+    borderTopWidth: 1,
+    borderTopColor: commonColors.line,
+  },
+  sectionTitleWrapper: {
+    paddingBottom: 10,
+    paddingLeft: 5,
+  },
+  textSectionTitle: {
+    color: commonColors.grayMoreText,
+    fontFamily: 'OpenSans-Semibold',
+    fontSize: 14,
+  },
+  ratingMainContainer: {
+    flexDirection: 'row',
+    paddingTop: 15,
+    paddingLeft: 5,
+    paddingRight: 15,
+  },
+  rating_commentContentContainer: {
+    flex: 1,
+    paddingLeft: 15,
+    alignItems: 'flex-start',
+  },  
+  input: {
+    fontSize: 14,
+    color: commonColors.title,
+    height: 64,
+    alignSelf: 'stretch',
+    borderColor: '#efefef',
+    backgroundColor: '#efefef',
+    borderWidth: 1,
+    borderRadius: 3,
+    paddingHorizontal: 8,
+    paddingVertical: 5,
+  },
+  buttonRateBusinessWrapper: {
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    marginVertical: 10,
+    paddingRight: 15,
+  },
+  buttonRateBusiness: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: commonColors.theme,
+    borderRadius: 4,
+    borderWidth: 4,
+    borderColor: commonColors.theme,
+    borderStyle: 'solid',
+    height: 32,
+  },
+  textButton: {
+    color: '#fff',
+    fontFamily: 'Open Sans',
+    fontWeight: 'bold',
+    fontSize: 14,
+    backgroundColor: 'transparent',
+    paddingHorizontal: 15,
+  },
+  imageCategory: {
+    width: 32,
+    height: 32,
+    borderRadius: 3,
   },
 });

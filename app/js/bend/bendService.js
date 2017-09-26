@@ -1481,6 +1481,25 @@ module.exports = {
         })
     },
 
+    captureComment(param, cb) {
+        Bend.execute("captureComment", param).then((ret)=>{
+            console.log(ret);
+            var id = ret._id
+            Bend.DataStore.get("comment", id, {
+                relations:{
+                    user:"user",
+                    "user.avatar":"BendFile"
+                }
+            }).then((ret)=>{
+                cb(null, ret)
+            }, err=>{
+                cb(err)
+            })
+        }, (err)=>{
+            cb(err);
+        })
+    },
+
     saveInstallInformation(param, cb) {
         delete param._bmd;
         console.log("saveInstallInformation", param)

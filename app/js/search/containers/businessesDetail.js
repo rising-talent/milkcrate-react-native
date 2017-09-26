@@ -258,7 +258,6 @@ class BusinessesDetail extends Component {
           console.log(error);
           return;
         }
-
         this.state.comments.unshift(result);
 
         this.mounted && this.setState({
