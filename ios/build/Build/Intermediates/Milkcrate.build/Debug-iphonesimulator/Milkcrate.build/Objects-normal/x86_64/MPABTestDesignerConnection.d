@@ -1,0 +1,19 @@
+dependencies: \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPABTestDesignerConnection.m \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/Mixpanel.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MixpanelPeople.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPABTestDesignerChangeRequestMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPAbstractABTestDesignerMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPABTestDesignerMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPABTestDesignerClearRequestMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPABTestDesignerConnection.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPWebSocket.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPABTestDesignerDeviceInfoRequestMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPABTestDesignerDisconnectMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPABTestDesignerSnapshotRequestMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPABTestDesignerSnapshotResponseMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPABTestDesignerTweakRequestMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPDesignerEventBindingMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPDesignerSessionCollection.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPLogger.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPSwizzler.h

@@ -1,0 +1,29 @@
+dependencies: \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/Mixpanel.m \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/Mixpanel.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MixpanelPeople.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MixpanelPrivate.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPNetwork.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MixpanelExceptionHandler.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/Mixpanel+AutomaticEvents.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/AutomaticEventsConstants.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPResources.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPABTestDesignerConnection.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPWebSocket.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/UIView+MPHelpers.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPDesignerEventBindingMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPAbstractABTestDesignerMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPABTestDesignerMessage.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPDesignerSessionCollection.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPEventBinding.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPObjectSelector.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPNotification.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPNotificationViewController.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPSurveyNavigationController.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPSurvey.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPSwizzler.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPVariant.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MixpanelPeoplePrivate.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPNetworkPrivate.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPLogger.h \
+  /Volumes/Work/ReactNative/milkcrate-react-native/ios/Mixpanel/MPFoundation.h
